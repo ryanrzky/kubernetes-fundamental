@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: pod-2
+    labels:
+        team: infra
+        version: 1.0.0
+        environment: production
+spec:
+    containers:
+        - name: nginx-ct
+          image: nginx
+          ports:
+            - containerPort: 80

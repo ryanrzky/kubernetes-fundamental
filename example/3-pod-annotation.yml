@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: pod-3
+    labels:
+        team: infra
+        version: 1.0.1
+        environment: production
+    annotations:
+        description: aplikasi ini dibuat oleh tim infra
+spec:
+    containers:
+        - name: nginx-ct
+          image: nginx
+          ports:
+            - containerPort: 80

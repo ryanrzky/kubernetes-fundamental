@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-rs
+spec:
+  replicas: 2
+  selector:
+    matchLabels: 
+      app: nginx
+  template:
+    metadata:
+      name: nginx-apache-pod
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx-ct
+          image: nginx:alpine
+          ports:
+          - containerPort: 80
+        - name: nodejs-ct
+          image: khannedy/nodejs-web
+          ports:
+          - containerPort: 3000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+    - port: 80
+      targetPort: 80
+      name: nginx
+    - port: 3000
+      targetPort: 3000
+      name: nodejs
